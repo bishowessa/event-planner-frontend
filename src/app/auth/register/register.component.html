@@ -1,0 +1,15 @@
+<div class="form-container">
+  <h2>Create Account</h2>
+  <form (ngSubmit)="onRegister()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="userData.email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="userData.password" name="password" required>
+    </div>
+    <button type="submit" class="primary">Register</button>
+    <button type="button" class="secondary" routerLink="/">Back</button>
+  </form>
+</div>

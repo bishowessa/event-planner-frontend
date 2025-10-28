@@ -1,0 +1,5 @@
+/* We use ::ng-deep to apply the global styles
+   to this standalone component. */
+::ng-deep .form-container {
+  width: 100%;
+}
