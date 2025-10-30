@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent {
   userData = {
+    username: '',
     email: '',
     password: ''
   };

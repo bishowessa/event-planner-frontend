@@ -7,17 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   // !!! IMPORTANT: Adjust this URL to match your GoLang backend's address
-  private apiUrl = 'http://localhost:8080/api'; 
+  private apiUrl = 'http://localhost:8080'; 
 
   constructor(private http: HttpClient) { }
 
   // Method to register a new user
-  register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+  register(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
   }
 
   // Method to log a user in
-  login(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, data);
   }
 }
