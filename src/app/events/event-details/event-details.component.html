@@ -1,0 +1,15 @@
+<div class="event-details-container" *ngIf="event">
+    <div class="header">
+        <h2>{{ event.title }}</h2>
+        <button *ngIf="isOrganizer" (click)="deleteEvent()" class="btn-delete">Delete Event</button>
+    </div>
+
+    <div class="details">
+        <!-- </ul>
+        --> 
+    </div>
+</div>
+
+<div *ngIf="!event">
+    <p>Loading event details...</p>
+</div>

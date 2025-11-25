@@ -1,0 +1,75 @@
+.event-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.details {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.response-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.response-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-going {
+    background-color: #28a745;
+}
+
+.btn-maybe {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-not-going {
+    background-color: #dc3545;
+}
+
+.invite-form {
+    display: flex;
+    gap: 10px;
+}
+
+.invite-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.invite-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

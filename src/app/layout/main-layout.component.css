@@ -1,0 +1,25 @@
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.btn-logout {
+    background: none;
+    border: none;
+    font: inherit;
+    padding: 0;
+}
+
+.content {
+    padding: 20px;
+}

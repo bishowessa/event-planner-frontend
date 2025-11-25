@@ -1,0 +1,32 @@
+EventPlanner: Event Scheduling System
+Introduction
+ EventPlanner is a comprehensive platform designed to assist users in organizing
+events. It lets users sign up, create events (as organizers), invite attendees, and track
+attendance. The system supports quick searching and filtering so you can find relevant
+events and tasks by keywords, dates, or user role.
+ Each team will be assigned a different technology stack (for the frontend, backend
+and database)
+ The project features will be elaborated below.
+ The project will be submitted as separate phases. Each phase deliverables are
+clarified below.
+Event Planner Features (Functional Requirements)
+1. User Management
+o Users can create an account using their email address and password.
+o Users can log in to their accounts using their credentials.
+2. Event Management (Event Organizer Role only)
+o Users can create new events with a title, date, time, location, and
+description.
+o Users can view all events they have organized
+o Users can view all events they are invited to.
+o Users can invite others to attend or collaborate on an event.
+o Users can delete events they have created.
+o For each event of a user, the user must me marked as an “organizer” if he
+is the creator of the event or an “attendee”.
+
+3. Response Management
+o Attendees can indicate their attendance status for events (Going, Maybe,
+Not Going).
+o Organizers can view the list of attendees and their statuses for each event.
+4. Search and Filtering:
+o Create an advanced search API to filter events and tasks based on
+keywords (event names, task descriptions), dates, and user roles.
