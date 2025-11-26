@@ -20,15 +20,33 @@ export class CreateEventComponent {
         time: '',
         location: ''
     };
+    errorMessage: string | null = null;
 
     constructor(private eventService: EventService, private router: Router) { }
 
     onSubmit(): void {
-        this.eventService.createEvent(this.event).subscribe({
+        this.errorMessage = null;
+
+        // Basic validation
+        if (!this.event.date || !this.event.time) {
+            this.errorMessage = 'Date and Time are required.';
+            return;
+        }
+
+        // Create payload with ISO date
+        const payload = {
+            ...this.event,
+            date: new Date(this.event.date).toISOString()
+        };
+
+        this.eventService.createEvent(payload).subscribe({
             next: () => {
                 this.router.navigate(['/app/dashboard']);
             },
-            error: (err) => console.error('Failed to create event', err)
+            error: (err) => {
+                console.error('Failed to create event', err);
+                this.errorMessage = err.error?.error || 'Failed to create event. Please try again.';
+            }
         });
     }
 }

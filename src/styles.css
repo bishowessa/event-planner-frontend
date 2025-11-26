@@ -124,3 +124,12 @@ a:hover {
   color: #0056b3;
   text-decoration: underline;
 }
+
+.error-alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}

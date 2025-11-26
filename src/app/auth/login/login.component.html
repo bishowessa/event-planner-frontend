@@ -1,5 +1,6 @@
 <div class="form-container centered-card">
   <h2>Login</h2>
+  <div *ngIf="errorMessage" class="error-alert">{{ errorMessage }}</div>
   <form (ngSubmit)="onLogin()">
     <div class="form-group">
       <label for="email">Email:</label>

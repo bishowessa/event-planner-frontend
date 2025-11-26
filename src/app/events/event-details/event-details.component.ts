@@ -16,8 +16,11 @@ import { Event } from '../../models/event.model';
 export class EventDetailsComponent implements OnInit {
     event: Event | null = null;
     isOrganizer: boolean = false;
-    inviteEmail: string = '';
+    inviteUserId: number | null = null;
     userId: string | null = null;
+
+    attendees: any[] = [];
+    isAttendee: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -36,9 +39,11 @@ export class EventDetailsComponent implements OnInit {
 
     loadEvent(id: string): void {
         this.eventService.getEvent(id).subscribe({
-            next: (event) => {
-                this.event = event;
-                this.isOrganizer = this.event.organizerId === this.userId;
+            next: (response: any) => {
+                this.event = response.event;
+                this.attendees = response.participants || [];
+                this.isOrganizer = (response.userRole === 'organizer');
+                this.isAttendee = (response.userRole === 'attendee');
             },
             error: (err) => console.error('Failed to load event', err)
         });
@@ -55,11 +60,11 @@ export class EventDetailsComponent implements OnInit {
     }
 
     invite(): void {
-        if (!this.event?.id || !this.inviteEmail) return;
-        this.eventService.inviteUser(this.event.id, this.inviteEmail).subscribe({
+        if (!this.event?.id || !this.inviteUserId) return;
+        this.eventService.inviteUser(this.event.id, this.inviteUserId).subscribe({
             next: () => {
                 alert('Invitation sent!');
-                this.inviteEmail = '';
+                this.inviteUserId = null;
             },
             error: (err) => console.error('Failed to invite user', err)
         });

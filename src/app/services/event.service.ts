@@ -8,24 +8,31 @@ import { Event } from '../models/event.model';
     providedIn: 'root'
 })
 export class EventService {
-    private apiUrl = 'http://localhost:8080/api';
+    private apiUrl = 'http://localhost:8080';
 
     constructor(private http: HttpClient, private authService: AuthService) { }
 
     private getHeaders(): HttpHeaders {
         const token = this.authService.getToken();
-        return new HttpHeaders({
-            'Authorization': `Bearer ${token}`,
+        let headers = new HttpHeaders({
             'Content-Type': 'application/json'
         });
+        if (token) {
+            headers = headers.set('Authorization', `Bearer ${token}`);
+        }
+        return headers;
     }
 
     createEvent(event: Event): Observable<Event> {
-        return this.http.post<Event>(`${this.apiUrl}/events`, event, { headers: this.getHeaders() });
+        return this.http.post<Event>(`${this.apiUrl}/events/`, event, { headers: this.getHeaders() });
     }
 
-    getEvents(): Observable<Event[]> {
-        return this.http.get<Event[]>(`${this.apiUrl}/events`, { headers: this.getHeaders() });
+    getMyOrganizedEvents(): Observable<Event[]> {
+        return this.http.get<Event[]>(`${this.apiUrl}/events/organized`, { headers: this.getHeaders() });
+    }
+
+    getMyInvitedEvents(): Observable<Event[]> {
+        return this.http.get<Event[]>(`${this.apiUrl}/events/invited`, { headers: this.getHeaders() });
     }
 
     getEvent(id: string): Observable<Event> {
@@ -36,15 +43,20 @@ export class EventService {
         return this.http.delete<void>(`${this.apiUrl}/events/${id}`, { headers: this.getHeaders() });
     }
 
-    inviteUser(eventId: string, email: string): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/events/${eventId}/invite`, { email }, { headers: this.getHeaders() });
+    inviteUser(eventId: string, userId: number): Observable<void> {
+        return this.http.post<void>(`${this.apiUrl}/events/${eventId}/invite`, { invitee_id: userId }, { headers: this.getHeaders() });
     }
 
     respondToEvent(eventId: string, status: string): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/events/${eventId}/respond`, { status }, { headers: this.getHeaders() });
+        return this.http.post<void>(`${this.apiUrl}/events/${eventId}/rsvp`, { status }, { headers: this.getHeaders() });
     }
 
-    searchEvents(params: any): Observable<Event[]> {
-        return this.http.get<Event[]>(`${this.apiUrl}/search`, { headers: this.getHeaders(), params });
+    searchEvents(params: { keyword?: string, date?: string, role?: string }): Observable<Event[]> {
+        let queryParams: any = {};
+        if (params.keyword) queryParams['q'] = params.keyword;
+        if (params.date) queryParams['date'] = params.date;
+        if (params.role && params.role !== 'All') queryParams['role'] = params.role;
+
+        return this.http.get<Event[]>(`${this.apiUrl}/events/search`, { headers: this.getHeaders(), params: queryParams });
     }
 }

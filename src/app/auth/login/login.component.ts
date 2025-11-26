@@ -16,10 +16,12 @@ export class LoginComponent {
     email: '',
     password: ''
   };
+  errorMessage: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   onLogin(): void {
+    this.errorMessage = null;
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
         console.log('Login successful!', response);
@@ -27,11 +29,12 @@ export class LoginComponent {
           this.authService.setToken(response.token);
           this.router.navigate(['/app/dashboard']);
         } else {
-          console.error('No token in response');
+          this.errorMessage = 'No token received from server';
         }
       },
       error: (err) => {
         console.error('Login failed:', err);
+        this.errorMessage = err.error?.error || 'An unexpected error occurred';
       }
     });
   }

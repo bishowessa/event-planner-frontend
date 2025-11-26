@@ -6,6 +6,13 @@ export interface Event {
     time: string;
     location: string;
     organizerId?: string;
+    attendees?: Attendee[];
+}
+
+export interface Attendee {
+    userId: number;
+    username: string;
+    status: string;
 }
 
 export interface EventResponse {

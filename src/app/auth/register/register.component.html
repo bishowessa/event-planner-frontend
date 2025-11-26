@@ -1,5 +1,6 @@
 <div class="form-container centered-card">
   <h2>Create Account</h2>
+  <div *ngIf="errorMessage" class="error-alert">{{ errorMessage }}</div>
   <form (ngSubmit)="onRegister()">
     <div class="form-group">
       <label for="username">username:</label>

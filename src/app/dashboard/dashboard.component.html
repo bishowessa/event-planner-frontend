@@ -2,11 +2,16 @@
   <header class="dashboard-header">
     <h1>Dashboard</h1>
     <div class="search-bar">
-      <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="search()"
-        placeholder="Search events by keyword, date...">
+      <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="search()" placeholder="Search events by keyword...">
+      <input type="date" [(ngModel)]="searchDate">
+      <select [(ngModel)]="searchRole">
+        <option value="All">All Roles</option>
+        <option value="Organizer">Organizer</option>
+        <option value="Attendee">Attendee</option>
+      </select>
       <button (click)="search()">Search</button>
     </div>
-    <a routerLink="/events/create" class="btn-create">Create New Event</a>
+    <a routerLink="/app/events/create" class="btn-create">Create New Event</a>
   </header>
 
   <div *ngIf="searchResults" class="search-results">
@@ -14,9 +19,9 @@
     <div class="event-grid">
       <div *ngFor="let event of searchResults" class="event-card">
         <h3>{{ event.title }}</h3>
-        <p>{{ event.date }} at {{ event.time }}</p>
+        <p>{{ event.date | date:'dd/MM/yyyy' }} at {{ event.time }}</p>
         <p>{{ event.location }}</p>
-        <a [routerLink]="['/events', event.id]" class="btn-details">View Details</a>
+        <a [routerLink]="['/app/events', event.id]" class="btn-details">View Details</a>
       </div>
     </div>
     <button (click)="searchResults = null">Clear Search</button>
@@ -29,7 +34,7 @@
         <div class="event-grid" *ngIf="organizedEvents.length > 0; else noOrganized">
           <div *ngFor="let event of organizedEvents" class="event-card organized">
             <h3>{{ event.title }}</h3>
-            <p>{{ event.date }} at {{ event.time }}</p>
+            <p>{{ event.date | date:'dd/MM/yyyy' }} at {{ event.time }}</p>
             <p>{{ event.location }}</p>
             <a [routerLink]="['/app/events', event.id]" class="btn-details">Manage</a>
           </div>
@@ -44,7 +49,7 @@
         <div class="event-grid" *ngIf="invitedEvents.length > 0; else noInvited">
           <div *ngFor="let event of invitedEvents" class="event-card invited">
             <h3>{{ event.title }}</h3>
-            <p>{{ event.date }} at {{ event.time }}</p>
+            <p>{{ event.date | date:'dd/MM/yyyy' }} at {{ event.time }}</p>
             <p>{{ event.location }}</p>
             <a [routerLink]="['/app/events', event.id]" class="btn-details">View</a>
           </div>

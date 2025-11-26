@@ -5,8 +5,36 @@
     </div>
 
     <div class="details">
-        <!-- </ul>
-        --> 
+        <p><strong>Date:</strong> {{ event.date | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Time:</strong> {{ event.time }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+        <p><strong>Description:</strong> {{ event.description }}</p>
+    </div>
+
+    <div class="attendees-section" *ngIf="isOrganizer">
+        <h3>Attendees</h3>
+        <ul *ngIf="attendees && attendees.length > 0; else noAttendees">
+            <li *ngFor="let attendee of attendees">
+                {{ attendee.user?.username || attendee.user?.email || attendee.User?.Username || 'Unknown User' }} ({{
+                attendee.status }})
+            </li>
+        </ul>
+        <ng-template #noAttendees>
+            <p>No attendees yet.</p>
+        </ng-template>
+    </div>
+
+    <div class="actions" *ngIf="isAttendee">
+        <h3>RSVP</h3>
+        <button (click)="respond('Going')">Going</button>
+        <button (click)="respond('Maybe')">Maybe</button>
+        <button (click)="respond('Not Going')">Not Going</button>
+    </div>
+
+    <div class="invite-section" *ngIf="isOrganizer">
+        <h3>Invite User</h3>
+        <input type="number" [(ngModel)]="inviteUserId" placeholder="Enter User ID">
+        <button (click)="invite()">Invite</button>
     </div>
 </div>
 
