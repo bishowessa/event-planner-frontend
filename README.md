@@ -18,7 +18,7 @@ This is the client-side application for the EventPlanner system, allowing users 
 
 1.  **Clone the repository:**
     ```bash
-    git clone <YOUR_FRONTEND_REPO_URL>
+    git clone https://github.com/bishowessa/event-planner-frontend
     cd event-planner-frontend
     ```
 
